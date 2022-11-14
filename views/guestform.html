@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form id="login-form" action="/guestbookcreate" method="post">
+    <div class="input-group">
+        <label for="name">이름</label>
+        <input id="name" type="text" name="name" required autofocus>
+    </div>
+    <div class="input-group">
+        <label for="email">이름메일</label>
+        <input id="email" type="email" name="email" required autofocus>
+    </div>
+    <div>
+        <textarea name="content"></textarea>
+
+    </div>
+    <button id="guestbook" type="submit" class="btn">방명록 등록</button>
+    <a id="guestbook" href="/myguestbook" class="btn">방명록 목록보기</a>
+</form>
+
+</body>
+</html>
