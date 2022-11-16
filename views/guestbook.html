@@ -5,10 +5,14 @@
     <title>Title</title>
 </head>
 <body>
+<a href="/guestbookform">방명록 등록</a>
 <table>
     <tr><td>ID</td><td>내용</td></tr>
 {% for post in title %}
-    <tr><td>{{post.id}}</td><td>{{post.content}}</td></tr>
+    <tr><td>{{post.id}}</td><td>{{post.content}}</td>
+        <td><a href="/guestbooks/delete/{{post.id}}" data-method="DELETE" data-disabled="true" >삭제</a></td>
+        <td><a href="/guestbooks/update/{{post.id}}">수정</a></td>
+    </tr>
 
 {% endfor %}
 

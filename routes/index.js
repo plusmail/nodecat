@@ -78,11 +78,15 @@ router.get('/guestbookform',(req, res, next) =>{
 
 router.post('/guestbookcreate',async (req, res, next) =>{
     const {name, email, content} = req.body;
-    let data = { name, email, content }
+    let data = { "name": name, "email": email, "content": content }
+    console.log("55555555->", data);
     try{
         const result = await request_post(req,'/guestbooks/create', data);
-        res.json(result.data);
+        // res.json(result.data);
         // return result.status == 200 ? result.data : "error";
+        if( result.data.code === 200){
+            res.redirect('/myguestbook');
+        }
 
     }
     catch (error) {
@@ -90,6 +94,55 @@ router.post('/guestbookcreate',async (req, res, next) =>{
         // next(error);
     }
 });
+
+router.get("/guestbooks/delete/:id", async (req, res, next) =>{
+    try {
+        const result = await request(req, '/guestbooks/delete/'+req.params.id);
+        // res.json(result.data);
+        console.log(result.data);
+        if( result.data.code === 200){
+            res.redirect('/myguestbook');
+        }
+    } catch (error) {
+        console.error(error);
+        next(error);
+    }
+})
+
+router.get("/guestbooks/update/:id", async (req, res, next) =>{
+    try {
+        const result = await request(req, '/guestbooks/update/'+req.params.id);
+        // res.json(result.data);
+        console.log(result.data);
+        if( result.data.code === 200){
+            res.render("guestupdate",{"guestbooks":result.data.payload });
+        }
+    } catch (error) {
+        console.error(error);
+        next(error);
+    }
+})
+
+
+router.post('/guestbookupdate',async (req, res, next) =>{
+    const {id, name, email, content} = req.body;
+    let data = { "id": id , "name": name, "email": email, "content": content }
+    console.log("55555555->", data);
+    try{
+        const result = await request_post(req,'/guestbooks/update', data);
+        // res.json(result.data);
+        // return result.status == 200 ? result.data : "error";
+        if( result.data.code === 200){
+            res.redirect('/myguestbook');
+        }
+
+    }
+    catch (error) {
+        console.error(error);
+        // next(error);
+    }
+});
+
 
 
 
